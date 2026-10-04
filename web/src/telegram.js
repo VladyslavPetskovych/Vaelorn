@@ -7,12 +7,21 @@ export function haptic(style = "light") {
   tg?.HapticFeedback?.impactOccurred(style);
 }
 
-// Match Telegram's header and background to the app; older clients don't support it.
-export function applyTheme() {
-  try {
-    tg?.setHeaderColor("#0f0b08");
-    tg?.setBackgroundColor("#0f0b08");
-  } catch {
-    /* unsupported Telegram version */
+// Match Telegram's chrome to the game and stop swipe-down from closing it mid-play.
+// Each call is optional: older Telegram clients don't support them.
+export function setupTelegram() {
+  if (!isInTelegram) return;
+  tg.ready();
+  tg.expand();
+  for (const call of [
+    () => tg.setHeaderColor("#1a1c2c"),
+    () => tg.setBackgroundColor("#1a1c2c"),
+    () => tg.disableVerticalSwipes(),
+  ]) {
+    try {
+      call();
+    } catch {
+      /* unsupported Telegram version */
+    }
   }
 }

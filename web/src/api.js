@@ -11,5 +11,5 @@ async function post(path, body) {
   return res.json();
 }
 
+// Records the visit (user counts in Redis) and returns the player's profile.
 export const startSession = () => post("/session");
-export const saveNote = (note) => post("/note", { note });
