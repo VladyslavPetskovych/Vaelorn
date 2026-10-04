@@ -1,15 +1,39 @@
 @import "tailwindcss";
 
-/* Telegram injects --tg-theme-* variables; fallbacks are for opening the page in a normal browser. */
 @theme {
-  --color-tg-bg: var(--tg-theme-bg-color, #ffffff);
-  --color-tg-text: var(--tg-theme-text-color, #111111);
-  --color-tg-hint: var(--tg-theme-hint-color, #8a8a8a);
-  --color-tg-card: var(--tg-theme-secondary-bg-color, #f2f2f5);
-  --color-tg-accent: var(--tg-theme-button-color, #2a7de1);
-  --color-tg-accent-text: var(--tg-theme-button-text-color, #ffffff);
+  --font-display: "Cinzel", Georgia, serif;
+  --font-body: "Crimson Text", Georgia, serif;
+
+  --color-night: #0f0b08;
+  --color-stone: #2a211b;
+  --color-stone-dark: #17110d;
+  --color-gold: #c9973f;
+  --color-gold-light: #f1d58a;
+  --color-parchment: #eadfc6;
+  --color-muted: #a8977a;
+  --color-ember: #c2482e;
+  --color-mana: #4a7fd1;
 }
 
-body {
-  @apply bg-tg-bg text-tg-text antialiased;
+@layer base {
+  body {
+    @apply min-h-dvh bg-night font-body text-parchment antialiased select-none;
+    background-image:
+      radial-gradient(ellipse at top, rgb(201 151 63 / 0.18), transparent 60%),
+      radial-gradient(ellipse at bottom, rgb(194 72 46 / 0.12), transparent 55%);
+    background-attachment: fixed;
+  }
+}
+
+@utility title-glow {
+  text-shadow: 0 0 12px rgb(241 213 138 / 0.45), 0 2px 0 rgb(0 0 0 / 0.6);
+}
+
+/* Framed stone panel with a gold double border, used by buttons and cards. */
+@utility rpg-frame {
+  @apply rounded-lg border border-gold/70 bg-linear-to-b from-stone to-stone-dark;
+  box-shadow:
+    inset 0 0 0 2px var(--color-stone-dark),
+    inset 0 0 0 3px rgb(201 151 63 / 0.25),
+    0 4px 14px rgb(0 0 0 / 0.5);
 }
