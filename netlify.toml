@@ -1,0 +1,11 @@
+# Netlify hosts the Mini App (free HTTPS domain) and proxies API calls to the Docker server,
+# so the server itself doesn't need a domain or SSL certificate.
+[build]
+  publish = "webapp"
+
+[[redirects]]
+  from = "/api/*"
+  # Replace with your server's public IP (or domain).
+  to = "http://YOUR_SERVER_IP:3000/api/:splat"
+  status = 200
+  force = true
