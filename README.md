@@ -39,7 +39,7 @@ Open port `3000` in the server's firewall. Logs: `docker compose logs -f app`.
 
 ### 2. Netlify
 
-1. In `netlify.toml`, replace `YOUR_SERVER_IP` with the server's public IP and push.
+1. `netlify.toml` already proxies `/api/*` to the server (89.38.129.132:3000); change it if the server moves.
 2. Netlify → **Add new site → Import from Git** → pick this repo. Build settings come from `netlify.toml`.
 3. Copy the site URL (e.g. `https://vaelorn.netlify.app`) into `WEBAPP_URL` in the server's `.env`, then
    `docker compose up -d` to restart.
