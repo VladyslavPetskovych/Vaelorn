@@ -7,7 +7,6 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 
 COPY src ./src
-COPY webapp ./webapp
 
 USER node
 EXPOSE 3000

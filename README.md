@@ -4,10 +4,10 @@ Telegram bot ([@VaelornBot](https://t.me/VaelornBot)) with a Mini App.
 
 - **Bot + API** – Node.js (grammY + Express), runs in Docker on your server
 - **Redis** – stores users and their data (Docker volume, not exposed publicly)
-- **Mini App** – static site in `webapp/`, hosted on Netlify for a free HTTPS domain
+- **Mini App** – React + Vite + Tailwind in `web/`, built and hosted on Netlify for a free HTTPS domain
 
 ```
-Telegram ──opens──▶ Netlify (webapp/)  ──/api/* proxy──▶ server:3000 (app) ──▶ redis
+Telegram ──opens──▶ Netlify (web/dist) ──/api/* proxy──▶ server:3000 (app) ──▶ redis
 ```
 
 Netlify proxies `/api/*` to the server, so the server needs no domain or SSL certificate.
@@ -40,7 +40,8 @@ Open port `3000` in the server's firewall. Logs: `docker compose logs -f app`.
 ### 2. Netlify
 
 1. `netlify.toml` already proxies `/api/*` to the server (89.38.129.132:3000); change it if the server moves.
-2. Netlify → **Add new site → Import from Git** → pick this repo. Build settings come from `netlify.toml`.
+2. Netlify → **Add new site → Import from Git** → pick this repo. Build settings come from `netlify.toml`
+   (base `web`, command `npm run build`, publish `dist`).
 3. Copy the site URL (e.g. `https://vaelorn.netlify.app`) into `WEBAPP_URL` in the server's `.env`, then
    `docker compose up -d` to restart.
 
@@ -49,7 +50,8 @@ The bot then shows an **Open app** button on `/start` and in the chat menu.
 ## Local development
 
 ```sh
-docker compose up -d --build   # app on http://localhost:3000
+docker compose up -d --build   # bot + API on http://localhost:3000
+cd web && npm install && npm run dev   # Mini App on http://localhost:5173 (proxies /api)
 ```
 
 Or without Docker (needs Redis on localhost): `npm install && npm run dev`.

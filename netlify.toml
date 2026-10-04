@@ -1,10 +1,18 @@
-# Netlify hosts the Mini App (free HTTPS domain) and proxies API calls to the Docker server,
+# Netlify builds the Mini App (web/) and proxies API calls to the Docker server,
 # so the server itself doesn't need a domain or SSL certificate.
 [build]
-  publish = "webapp"
+  base = "web"
+  command = "npm run build"
+  publish = "dist"
 
 [[redirects]]
   from = "/api/*"
   to = "http://89.38.129.132:3000/api/:splat"
   status = 200
   force = true
+
+# Any other path serves the React app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Telegram injects --tg-theme-* variables; fallbacks are for opening the page in a normal browser. */
+@theme {
+  --color-tg-bg: var(--tg-theme-bg-color, #ffffff);
+  --color-tg-text: var(--tg-theme-text-color, #111111);
+  --color-tg-hint: var(--tg-theme-hint-color, #8a8a8a);
+  --color-tg-card: var(--tg-theme-secondary-bg-color, #f2f2f5);
+  --color-tg-accent: var(--tg-theme-button-color, #2a7de1);
+  --color-tg-accent-text: var(--tg-theme-button-text-color, #ffffff);
+}
+
+body {
+  @apply bg-tg-bg text-tg-text antialiased;
+}

@@ -1,4 +1,3 @@
-import path from "node:path";
 import express from "express";
 import { config } from "./config.js";
 import { getStats, getUser, saveNote, trackUser } from "./store.js";
@@ -33,9 +32,6 @@ export function createApi() {
     await saveNote(req.tgUser.id, note);
     res.json({ user: await getUser(req.tgUser.id) });
   });
-
-  // Serves the Mini App too, so the server works on its own (handy for local testing).
-  app.use(express.static(path.resolve("webapp")));
 
   app.use((err, _req, res, _next) => {
     console.error("API error:", err);
