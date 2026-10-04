@@ -1,0 +1,14 @@
+{
+  "name": "vaelorn-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node --env-file=.env bot.js",
+    "dev": "node --env-file=.env --watch bot.js"
+  },
+  "dependencies": {
+    "grammy": "^1.46.0"
+  }
+}
