@@ -5,7 +5,6 @@
 
 [[redirects]]
   from = "/api/*"
-  # Replace with your server's public IP (or domain).
-  to = "http://YOUR_SERVER_IP:3000/api/:splat"
+  to = "http://89.38.129.132:3000/api/:splat"
   status = 200
   force = true
